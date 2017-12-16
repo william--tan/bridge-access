@@ -36,6 +36,21 @@ exports.create_repayment = async (req, res) => {
 	interest = req.body['interest[]'];
 	pa = req.body['payment_amount[]'];
 	b = req.body['balance[]'];
+
+	if (typeof pn == "string")
+		pn = [pn];
+	if (typeof pd == "string")
+		pd = [pd];
+	if (typeof p == "string")
+		p = [p];
+	if (typeof pa == "string")
+		pa = [pa];
+	if (typeof b == "string")
+		b = [b];
+	if (typeof interest == "string")
+		interest = [interest];
+
+
 	for (let i = 0; i < pn.length; i++)
 	{
 		repayments.push({

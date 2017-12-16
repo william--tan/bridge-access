@@ -16,10 +16,6 @@ exports.updateQuantity = async (req, res) => {
 	console.log(req.body);
 	let a = req.body['a[]'];
 	let b = req.body['cid[]'];
-	console.log("______");
-	console.log(a, typeof a);
-	console.log(b, typeof b);
-	console.log("______");
 
 	if (typeof a == "string")
 		a = [a];
