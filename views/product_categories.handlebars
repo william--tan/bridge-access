@@ -1,0 +1,584 @@
+<!-- <?php
+// $this->load->view('layout/client_header');
+?> -->
+<style>
+    /*SET the width to 20% and add 5 items*/
+    /*.carousel-item.active,
+    .carousel-item.active + .carousel-item,
+    .carousel-item.active + .carousel-item  + .carousel-item,
+    .carousel-item.active + .carousel-item  + .carousel-item + .carousel-item,
+    .carousel-item.active + .carousel-item  + .carousel-item + .carousel-item + .carousel-item{
+       width: 20%;
+       display: block;
+       float:left;*/
+    /*}*/
+    /*SET the width to 20% and add 5 items*/
+
+    body{
+        background:#eee;
+    }
+    .thumbnail {
+        position:relative;
+        overflow:hidden;
+    }
+    .thumbnail{
+        opacity:0.90;
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+    .thumbnail:hover{
+        opacity:1.00;
+        box-shadow: 0px 0px 10px #808080;
+    }
+    .thumbnail {
+        height: 250px;
+    }
+    a img {
+        max-width: 100%;
+
+        -moz-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+    a:hover img {
+        -moz-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+    a{
+        text-align: center;
+    }
+
+    h5 {
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    /**************
+     SIDE MENU CSS
+    ***************/
+
+    .border {
+        margin-top:10px;
+        border: #cdcdcd medium solid;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+    }
+
+    .mini-menu{
+        width: auto;
+        border-radius: 3px;
+        /*    box-shadow:0 0 8px rgba(0, 0, 0, 0.06);*/
+        overflow: hidden;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        /*    color: #848C8F;*/
+        font-size: 12px;
+        margin: 10px;
+    }
+
+    .mini-menu ul {
+        list-style: none;
+        margin: 0;
+        padding:0;
+        text-align:left;
+    }
+
+    .mini-menu > ul > li {
+        position: relative;
+    }
+
+    /*MENU CATEGORY FONTS*/
+    .mini-menu > ul > li > a {
+        display: block;
+        outline: 0;
+        text-align: left;
+        padding: 1.2em 1em;
+        text-decoration: none;
+        color: #000;
+        font-weight: normal;
+        letter-spacing: 2px;
+        /*        background: #FEFEFE;*/
+        border-bottom: 1.5px solid #EAEAEA;
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    .mini-menu .sub > ul {
+        height: 0;
+        overflow: hidden;
+        /*        background: #848C8F;*/
+    }
+
+
+    /*SUB CATEGORY FONTS*/
+    .mini-menu .sub > ul > li > a {
+        font-family: 'Josefin Sans', sans-serif;
+        text-align: left;
+        /*        color:#FEFEFE;*/
+        color: rgba(0,0,0,.5);
+        font-size: 13px;
+        display: block;
+        text-decoration: none;
+        padding: .7em 1em;
+        text-transform: capitalize;
+        font-style: normal;
+        letter-spacing: 1px;
+    }
+
+    .mini-menu .sub > ul > li > a:hover{
+        opacity:1.00;
+        color: orange;
+    }
+
+    /*.mini-menu .sub > ul > li > a:hover,*/
+    .mini-menu .sub > a.active,
+    {
+        padding-left: 1.3em;
+        color: blue;
+        content: "1";
+        float: right;
+        margin-right:6px;
+        line-height: 12px;
+    }
+
+    .mini-menu .sub >  a:after
+    {
+        /*       content: "»";*/
+        /*        content: "+";*/
+        float: right;
+        margin-right:6px;
+        line-height: 12px;
+    }
+
+    /*CARET CSS*/
+    .caret {
+        position: relative;
+    }
+
+    .caret:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-top: 5px solid #050505;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+    }
+
+    .caret:after {
+        content: '';
+        position: absolute;
+        left: 30px;
+        top: 0;
+        border-top: -25px solid #eeeeee;
+        border-left: -25px solid transparent;
+        border-right: -25px solid transparent;
+    }
+
+    /*PRICE FILTER*/
+    .ui-slider .ui-slider-handle {
+        position: absolute;
+        z-index: 2;
+        width: 0.7em;
+        height: 1.6em;
+        cursor: default;
+        outline: none;
+        border: 1px solid rgb(207, 207, 207);
+        background: orange;
+        border-image: initial;
+    }
+
+    /*PAGINATION*/
+    .pagination>li>a, .pagination>li>span { 
+        border: none;
+        margin: 0 5px;
+        color: black;
+        font-family: 'Josefin Sans', sans-serif;
+        color: rgba(0,0,0,.5);
+    }
+
+    .pagination>li>a:hover { 
+        color: orange !important;
+    }
+
+    .pagination>li>a:active { 
+        color: orange !important;
+    }
+
+
+    /* Desktops and laptops ----------- */
+    @media only screen  and (min-width : 1224px) {
+        .carousel-control-next {
+            right: -104px;
+        }
+        .carousel-control-prev {
+            left: -104px;
+        }
+    }
+    @media only screen and (min-width : 320px) and (max-width: 480px) {
+        .img-store{
+            padding-right:0px;padding-left: 50px !important;
+        }
+
+
+    }
+
+    @media only screen and (min-width : 480px) and (max-width: 768px) {
+        .img-store{
+            padding-right:0px;padding-left: 50px !important;
+        }
+    }
+
+    .img-store{
+        padding-right:0px;padding-left: 150px;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background: transparent no-repeat center center;
+        background-size: 100% 100%;
+    }
+
+    .carousel-control-next-icon {
+        background-image: url('/assets/images/arrow2.png');
+    }
+    .carousel-control-prev-icon {
+        background-image: url('../assets/images/arrow1.png');
+    }
+
+    /*PAGINATION*/
+    .pagination>li>a, .pagination>li>span {
+        border: none;
+        margin: 0 5px;
+        color: black;
+        font-family: 'Josefin Sans', sans-serif;
+        color: rgba(0,0,0,.5);
+    }
+
+    .pagination>li>a:hover {
+        color: orange !important;
+        background-color: #f2f2f2 !important;
+    }
+
+    .pagination>li>a:active {
+        color: orange !important;
+    }
+
+    .paginationActive{
+        background-color: #f2f2f2 !important;
+        color: orange !important;
+        font-weight: bold;
+    }
+</style>
+
+{{!-- NEW products_categories --}}
+<section class="content-section-a" style="background-color: #FFF; margin-top: 90px;">
+    <div class="container-fluid">
+        {{!-- SEARCH BAR and CART --}}
+        <div class="row mt-3">
+            <div class="col-md-10 input-group search-product">
+                <input type="text" class="form-control" id="search_term" style="height: 35px;" name="search_term" placeholder="Search item..."  onkeyup="do_search();">
+                <span class="input-group-btn">
+                <button class="btn btn-warning searchItemBtn" type="submit" style="height: 35px;"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+            <div class="col-md-2 nav-item">
+                <a href="/cart"><button type="button" class="btn btn-outline-warning btn-sm pull-right" style="height: 35px; margin-left: 4px; width: 100%;"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</button></a>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            {{> display_category}}
+            {{> display_search}}
+        </div>
+
+        <!-- Pagination -->
+        {{#if paginationPages}}
+        <div class="row mt-4">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <nav class="activePage" aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {{#if searchQuery}}
+                            {{#if filter}}
+                                {{#if pageOne}}
+                                {{else}}
+                                <li class="page-item">
+                                    <a class="page-link" href="/shop/product_categories/{{prev}}/filter?min={{minPrice}}&max={{maxPrice}}&search={{searchQuery}}">&larr;</a>
+                                </li>
+                                {{/if}}
+                                <li class="page-item">
+                                    <a class="page-link" href="/shop/product_categories/{{first}}/filter?min={{minPrice}}&max={{maxPrice}}&search={{searchQuery}}">First</a>
+                                </li>
+                                {{#each paginationPages}}
+                                    <li class="page-item {{#if active}}active{{/if}}"><a class="page-link {{#if active}}paginationActive{{/if}}" href="#">{{ pageNum }}</a></li>
+                                {{/each}}
+                                <li class="page-item">
+                                    <a class="page-link" href="/shop/product_categories/{{last}}/filter?min={{minPrice}}&max={{maxPrice}}&search={{searchQuery}}">Last</a>
+                                </li>
+                                {{#if lastPage}}
+                                {{else}}
+                                    <li class="page-item">
+                                        <a class="page-link" href="/shop/product_categories/{{next}}/filter?min={{minPrice}}&max={{maxPrice}}&search={{searchQuery}}">&rarr;</a>
+                                    </li>
+                                {{/if}}
+                            {{else}}
+                                {{#if pageOne}}
+                                {{else}}
+                                    <li class="page-item"><a class="page-link" href="/shop/product_categories/search/{{searchQuery}}/{{prev}}">&larr;</a></li>
+                                {{/if}}
+                                <li class="page-item"><a class="page-link" href="/shop/product_categories/search/{{searchQuery}}/{{first}}">First</a></li>
+                                {{#each paginationPages}}
+                                    <li class="page-item {{#if active}}active{{/if}}"><a class="page-link {{#if active}}paginationActive{{/if}}" href="#">{{ pageNum }}</a></li>
+                                {{/each}}
+                                <li class="page-item"><a class="page-link" href="/shop/product_categories/search/{{searchQuery}}/{{last}}">Last</a></li>
+                                {{#if lastPage}}
+                                {{else}}
+                                    <li class="page-item"><a class="page-link" href="/shop/product_categories/search/{{searchQuery}}/{{next}}">&rarr;</a></li>
+                                {{/if}}
+                            {{/if}}
+                        {{else if categorySearchQuery}}
+                            {{#if filter}}
+                                {{#if pageOne}}
+                                {{else}}
+                                    <li class="page-item">
+                                        <a class="page-link" href="/shop/product_categories/{{prev}}/filter?min={{minPrice}}&max={{maxPrice}}&category={{categorySearchQuery}}">&larr;</a>
+                                    </li>
+                                {{/if}}
+                                <li class="page-item">
+                                    <a class="page-link" href="/shop/product_categories/{{first}}/filter?min={{minPrice}}&max={{maxPrice}}&category={{categorySearchQuery}}">First</a>
+                                </li>
+                                {{#each paginationPages}}
+                                    <li class="page-item {{#if active}}active{{/if}}"><a class="page-link {{#if active}}paginationActive{{/if}}" href="#">{{ pageNum }}</a></li>
+                                {{/each}}
+                                <li class="page-item">
+                                    <a class="page-link" href="/shop/product_categories/{{last}}/filter?min={{minPrice}}&max={{maxPrice}}&category={{categorySearchQuery}}">Last</a>
+                                </li>
+                                {{#if lastPage}}
+                                {{else}}
+                                    <li class="page-item">
+                                        <a class="page-link" href="/shop/product_categories/{{next}}/filter?min={{minPrice}}&max={{maxPrice}}&category={{categorySearchQuery}}">&rarr;</a>
+                                    </li>
+                                {{/if}}
+                            {{else}}
+                                {{#if pageOne}}
+                                {{else}}
+                                    <li class="page-item"><a class="page-link" href="/shop/product_categories/category/{{categorySearchLink}}/{{prev}}">&larr;</a></li>
+                                {{/if}}
+                                <li class="page-item"><a class="page-link" href="/shop/product_categories/category/{{categorySearchLink}}/{{first}}">First</a></li>
+                                {{#each paginationPages}}
+                                    <li class="page-item {{#if active}}active{{/if}}"><a class="page-link {{#if active}}paginationActive{{/if}}" href="#">{{ pageNum }}</a></li>
+                                {{/each}}
+                                <li class="page-item"><a class="page-link" href="/shop/product_categories/category/{{categorySearchLink}}/{{last}}">Last</a></li>
+                                {{#if lastPage}}
+                                {{else}}
+                                    <li class="page-item"><a class="page-link" href="/shop/product_categories/category/{{categorySearchLink}}/{{next}}">&rarr;</a></li>
+                                {{/if}}
+                            {{/if}}
+                        {{else if subCategorySearchQuery}}
+                            {{#if filter}}
+                                {{#if pageOne}}
+                                {{else}}
+                                    <li class="page-item">
+                                        <a class="page-link" href="/shop/product_categories/{{prev}}/filter?min={{minPrice}}&max={{maxPrice}}&subcategory={{subCategorySearchQuery}}">&larr;</a>
+                                    </li>
+                                {{/if}}
+                                <li class="page-item">
+                                    <a class="page-link" href="/shop/product_categories/{{first}}/filter?min={{minPrice}}&max={{maxPrice}}&subcategory={{subCategorySearchQuery}}">First</a>
+                                </li>
+                                {{#each paginationPages}}
+                                    <li class="page-item {{#if active}}active{{/if}}"><a class="page-link {{#if active}}paginationActive{{/if}}" href="#">{{ pageNum }}</a></li>
+                                {{/each}}
+                                <li class="page-item">
+                                    <a class="page-link" href="/shop/product_categories/{{last}}/filter?min={{minPrice}}&max={{maxPrice}}&subcategory={{subCategorySearchQuery}}">Last</a>
+                                </li>
+                                {{#if lastPage}}
+                                {{else}}
+                                    <li class="page-item">
+                                        <a class="page-link" href="/shop/product_categories/{{next}}/filter?min={{minPrice}}&max={{maxPrice}}&subcategory={{subCategorySearchQuery}}">&rarr;</a>
+                                    </li>
+                                {{/if}}
+                            {{else}}
+                                {{#if pageOne}}
+                                {{else}}
+                                    <li class="page-item"><a class="page-link" href="/shop/product_categories/subcategory/{{subCategorySearchLink}}/{{prev}}">&larr;</a></li>
+                                {{/if}}
+                                <li class="page-item"><a class="page-link" href="/shop/product_categories/subcategory/{{subCategorySearchLink}}/{{first}}">First</a></li>
+                                {{#each paginationPages}}
+                                    <li class="page-item {{#if active}}active{{/if}}"><a class="page-link {{#if active}}paginationActive{{/if}}" href="#">{{ pageNum }}</a></li>
+                                {{/each}}
+                                <li class="page-item"><a class="page-link" href="/shop/product_categories/subcategory/{{subCategorySearchLink}}/{{last}}">Last</a></li>
+                                {{#if lastPage}}
+                                {{else}}
+                                    <li class="page-item"><a class="page-link" href="/shop/product_categories/subcategory/{{subCategorySearchLink}}/{{next}}">&rarr;</a></li>
+                                {{/if}}
+                            {{/if}}
+                        {{else}}
+                            {{#if pageOne}}
+                            {{else}}
+                                <li class="page-item"><a class="page-link" href="/shop/product_categories/{{prev}}">&larr;</a></li>
+                            {{/if}}
+                            <li class="page-item"><a class="page-link" href="/shop/product_categories/{{first}}">First</a></li>
+                            {{#each paginationPages}}
+                                <li class="page-item {{#if active}}active{{/if}}"><a class="page-link {{#if active}}paginationActive{{/if}}" href="#">{{ pageNum }}</a></li>
+                            {{/each}}
+                            <li class="page-item"><a class="page-link" href="/shop/product_categories/{{last}}">Last</a></li>
+                            {{#if lastPage}}
+                            {{else}}
+                                <li class="page-item"><a class="page-link" href="/shop/product_categories/{{next}}">&rarr;</a></li>
+                            {{/if}}
+                        {{/if}}
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        {{/if}}
+    </div>
+</section>
+
+<script type="text/javascript">
+
+
+    $(".searchItemBtn").on("click", function () {
+        if($("#search_term").val() === "")
+        {
+            window.location.href = "/shop/product_categories/1";
+        }
+        else
+        {
+            window.location.href = "/shop/product_categories/search/"+$("#search_term").val()+"/1";
+        }
+    });
+
+    $("#supplier").change(function () {
+        var e = document.getElementById("supplier");
+        var strSup = e.options[e.selectedIndex].value;
+        if (strSup == '1') {
+            $('#prod_list').show();
+        } else {
+            $('#prod_list').hide();
+        }
+
+    });
+
+    function do_search()
+    {
+        var base_url = window.location.origin+"/";
+        var search_term=$("#search_term").val();
+        $.ajax
+        ({
+            type:'post',
+            url:base_url+'dashboard/search_items',
+            data:{
+                search:"search",
+                search_term:search_term
+            },
+            success:function(response)
+            {
+                //document.getElementById("result_div").innerHTML=response;
+            }
+        });
+
+        return false;
+    }
+
+    $(document).ready(function () {
+        $(".sub > a").click(function() {
+            var ul = $(this).next(),
+                    clone = ul.clone().css({"height":"auto"}).appendTo(".mini-menu"),
+                    height = ul.css("height") === "0px" ? ul[0].scrollHeight + "px" : "0px";
+            clone.remove();
+            ul.animate({"height":height});
+            return false;
+        });
+        $('.mini-menu > ul > li > a').click(function(){
+            $('.sub a').removeClass('active');
+            $(this).addClass('active');
+        }),
+                $('.sub ul li a').click(function(){
+                    $('.sub ul li a').removeClass('active');
+                    $(this).addClass('active');
+                });
+    });
+
+    $( function() {
+        $( "#slider-range" ).slider({
+            range: true,
+            min: {{ priceRange.min_price }},
+            max: {{ priceRange.max_price }},
+            values: [ {{priceRange.min_price}}, {{priceRange.max_price}} ],
+            slide: function( event, ui ) {
+                $( "#amount" ).val( "₱" + ui.values[ 0 ] + " - ₱" + ui.values[ 1 ] );
+                var mi = ui.values[0];
+                var mx = ui.values[1];
+                $("#slider-range").attr("mininput", mi);
+                $("#slider-range").attr("maxinput", mx);
+                filterSystem(mi, mx);
+            }
+        });
+        $( "#amount" ).val( "₱" + $( "#slider-range" ).slider( "values", 0 ) +
+                " - ₱" + $( "#slider-range" ).slider( "values", 1 ) );
+    } );
+
+
+    function filterSystem(minPrice, maxPrice) {
+        $(".items div.item").hide().filter(function () {
+            var price = parseInt($(this).data("price"), 10);
+            return price >= minPrice && price <= maxPrice;
+        }).show();
+    }
+
+    $(".updatePrice").on("click", function () {
+        var min = $("#slider-range").attr("mininput");
+        var max = $("#slider-range").attr("maxinput");
+        if (min == undefined || max == undefined){
+            min = {{priceRange.min_price}};
+            max = {{ priceRange.max_price }};
+        }
+        {{#if itemSearch}}
+            window.location.href = "/shop/product_categories/1/filter?min="+ min + "&max=" + max + "&search={{ searchQuery }}";
+        {{else if categorySearchQuery}}
+            var urlStr = "/shop/product_categories/1/filter?min="+ min + "&max=" + max + "&category={{ categorySearchLink }}";
+            window.location.href = urlStr.replace("amp;", "").replace("&#x27;", "'");
+        {{else if subCategorySearchQuery}}
+            var urlStr = "/shop/product_categories/1/filter?min="+ min + "&max=" + max + "&subcategory={{ subCategorySearchLink }}";
+            window.location.href = urlStr.replace("amp;", "").replace("&#x27;", "'");
+        {{else}}
+            window.location.href = "/shop/product_categories/1/filter?min="+ min + "&max=" + max + "";
+        {{/if}}
+    });
+
+    $(".page-link").on("click", function (event) {
+        {{#if itemSearch}}
+            {{#if filter}}
+                window.location.href = "/shop/product_categories/"+$(event.target).text()+"/filter?min={{priceRange.min_price}}&max={{priceRange.max_price}}&search={{searchQuery}}";
+            {{else}}
+                window.location.href = "/shop/product_categories/search/{{searchQuery}}/"+ $(event.target).text() +"";
+            {{/if}}
+        {{else if categorySearchQuery}}
+            {{#if filter}}
+                var urlStr = "/shop/product_categories/"+$(event.target).text()+"/filter?min={{priceRange.min_price}}&max={{priceRange.max_price}}&category={{categorySearchQuery}}";
+            {{else}}
+                var urlStr = "/shop/product_categories/category/{{categorySearchQuery}}/"+ $(event.target).text() +"";
+            {{/if}}
+            window.location.href = urlStr.replace("amp;", "").replace("&#x27;", "'").replace("'s", "%5C%5C's");
+        {{else if subCategorySearchQuery}}
+            {{#if filter}}
+                var urlStr = "/shop/product_categories/"+$(event.target).text()+"/filter?min={{priceRange.min_price}}&max={{priceRange.max_price}}&subcategory={{subCategorySearchQuery}}";
+            {{else}}
+                var urlStr = "/shop/product_categories/subcategory/{{subCategorySearchQuery}}/"+ $(event.target).text() +"";
+            {{/if}}
+            window.location.href = urlStr.replace("amp;", "").replace("&#x27;", "'").replace("'s", "%5C%5C's");
+        {{else}}
+        {{#if priceRange.min_price}}
+            window.location.href = "/shop/product_categories/"+ $(event.target).text() +"/filter?min={{priceRange.min_price}}&max={{priceRange.max_price}}";
+        {{else}}
+            window.location.href = "/shop/product_categories/"+ $(event.target).text() +"";
+        {{/if}}
+        {{/if}}
+    });
+</script>

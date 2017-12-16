@@ -1,0 +1,33 @@
+<div class="col-md-3">
+    <div class="border" style="padding: 10px;">
+        <h5>CATEGORIES</h5>
+            <div class="mini-menu">
+                <ul>
+                    {{#each categories}}
+                        <li class="sub">
+                            <a>
+                                {{ key }}
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="/shop/product_categories/category/{{ categoryLink }}/1"><span  style="font-size: 15px; color: rgba(0,0,0,.5);">Show All</span></a>
+                                </li>
+                                {{#each subcat}}
+                                    <li><a href="/shop/product_categories/subcategory/{{ subcategoryLink }}/1">{{ subcategory }}</a></li>
+                                {{/each}}
+                            </ul>
+                        </li>
+                    {{/each}}
+                </ul>
+                <div class="menu-price menu-item mt-4 mb-3">
+                    <h5>PRICE</h5>
+                    <p>
+                        <!--<label for="amount">Price range:</label>-->
+                        <input type="text" readonly id="amount"  style="border:0; color:orange; font-weight:normal; font-size:15px;">
+                    </p>
+                    <div id="slider-range"></div>
+                        <button class="btn btn-warning updatePrice">Update Filter</button>
+                </div>
+            </div>
+    </div>
+</div>

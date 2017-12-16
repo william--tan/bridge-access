@@ -1,0 +1,688 @@
+<style type="text/css">
+    p {
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 15px;
+    }
+
+    h4 {
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    h5 {
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    /*TABLE CSS*/
+    .table>tbody>tr>td, .table>tfoot>tr>td{
+        vertical-align: middle;
+    }
+
+    /*SECTIONS CSS*/
+
+    .panel-group {
+      padding-top: 50px;
+    }
+    .panel-default {
+      border-radius: 0;
+      border: none;
+      background: none;
+      margin-bottom: 0;
+      padding-bottom: 14px;
+    }
+/*    .panel-default > .panel-heading {
+      border: none;
+      background: none;
+      padding: 0;
+    }*/
+/*    .panel-default > .panel-heading + .panel-collapse .panel-body {
+      border: none;
+      padding: 0 0 0 32px;
+    }*/
+/*    .panel-default h5 {
+      font-family: 'Josefin Sans', sans-serif;
+      padding: 0;
+      margin: 0 0 5px;
+    }*/
+/*    .panel-group .panel+.panel {
+      margin-top: 15px;
+    }*/
+/*    .panel-default .accordion-toggle:before {
+      content: "";
+      width: 21px;
+      height: 21px;
+      display: inline-block;
+      background: orange url(http://keenthemes.com/assets/bootsnipp/toggle-icons.png) no-repeat 6px 10px;
+      border-radius: 50%;
+      margin-right: 10px;
+      position: relative;
+      top: 4px;
+    }*/
+/*    .panel-default .collapsed:before {
+      background: #495764 url(http://keenthemes.com/assets/bootsnipp/toggle-icons.png) no-repeat 6px -148px;
+    }*/
+/*    .panel-default .panel-title:hover .collapsed:before {
+      background-color: orange;
+    }
+    .panel-default .accordion-toggle,
+    .panel-default .accordion-toggle:focus,
+    .panel-default .accordion-toggle:hover,
+    .panel-default .accordion-toggle:active {
+      color: #000;
+      text-decoration: none;
+    }
+    .panel-default .collapsed {
+      color: #5f6f7e;
+    }*/
+
+    /*Addresses CSS*/
+    .form-control {
+        width: 100%;
+    }
+
+    /*Media Query*/
+    @media screen and (max-width: 600px) {
+        table#cart tbody td .form-control{
+            width:20%;
+            display: inline !important;
+        }
+        .actions .btn{
+            width:36%;
+            margin:1.5em 0;
+        }
+        
+        .actions .btn-info{
+            float:left;
+        }
+        .actions .btn-danger{
+            float:right;
+        }
+
+        table#cart thead { display: none; }
+        table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+        table#cart tbody tr td:first-child { background: #333; color: #fff; }
+        table#cart tbody td:before {
+            content: attr(data-th); font-weight: bold;
+            display: inline-block; width: 8rem;
+        }
+        
+        table#cart tfoot td{display:block; }
+        table#cart tfoot td .btn{display:block;} 
+    }
+
+
+</style>
+
+<section class="content-section-a" style="background-color: #FFF; margin-top: 90px;">
+    <div class="container-fluid">
+        {{!-- SHIPPING ADDRESS --}}
+        <div class="row mt-3">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <h5>Shipping Address</h5>
+                    <p style="font-size: 12px;">Delivery Information: 3-7 Business days once in transit.</p>
+                    <form id="order" class="">
+                        <div class="panel-body">
+                            <div class="row table-bordered">
+                                {{!-- Saved Addresses --}}
+                                <div class="col-md-6 mt-4 mb-3">
+                                    <h5>My Addresses</h5>
+                                    <hr>
+                                    <ul class="navbar-nav" style="padding-bottom: 8px">
+                                        {{!-- DISPLAY ADDRESSES --}}
+                                        {{#each addresses}}
+                                         <li class="nav-item">
+                                            <label>
+                                                <input type="radio" name="savedAddress" class="mr-1 addressRadio" style="font-size:12px;" address_id="{{id}}"required> <span class="mr-2" style="font-size:13px;"><b>{{name}}</b><br> {{address1}}, {{address2}}, {{city}}, {{zip}}</span>
+                                            </label>
+                                        </li>
+                                        {{/each}}
+                                        {{!-- NEW ADDRESS BUTTON --}}
+                                        <button class="btn btn-warning addressRadio" style="font-size: 13px; font-weight:bold; color: rgba(0,0,0,.5); height: 35px;"><a style="color: rgba(0,0,0,.5);">Use New Address</a></button>
+                                    </ul>
+                                </div>
+
+                                {{!-- New Address --}}
+                                <div class="col-md-6 mt-4">
+                                    <h5>New Address</h5>
+                                    <hr>
+                                    <form class="form-horizontal">
+                                        <fieldset>
+                                            <!-- full-name input-->
+                                            <div class="control-group">
+                                                <label class="control-label">Full Name</label>
+                                                <div class="controls">
+                                                    <input id="full-name" name="full-name" type="text" class="form-control newAddress" disabled>
+                                                    <p class="help-block"></p>
+                                                </div>
+                                            </div>
+                                            <!-- address-line1 input-->
+                                            <div class="control-group">
+                                                <label class="control-label">Address Line 1</label>
+                                                <div class="controls">
+                                                    <input id="address-line1" name="address-line1" type="text" class="form-control newAddress" disabled>
+                                                    <p class="help-block">Street address, P.O. box, company name, c/o</p>
+                                                </div>
+                                            </div>
+                                            <!-- address-line2 input-->
+                                            <div class="control-group">
+                                                <label class="control-label">Address Line 2</label>
+                                                <div class="controls">
+                                                    <input id="address-line2" name="address-line2" type="text" class="form-control newAddress" disabled>
+                                                    <p class="help-block">Apartment, suite , unit, building, floor, etc.</p>
+                                                </div>
+                                            </div>
+                                            <!-- city input-->
+                                            <div class="control-group">
+                                                <label class="control-label">City / Province</label>
+                                                <div class="controls">
+                                                    <input id="city" name="city" type="text" class="form-control newAddress" disabled>
+                                                    <p class="help-block"></p>
+                                                </div>
+                                            </div>
+                                            <!-- postal-code input-->
+                                            <div class="control-group">
+                                                <label class="control-label">Zip / Postal Code</label>
+                                                <div class="controls">
+                                                    <input id="postal-code" name="postal-code" type="text" class="form-control newAddress" disabled>
+                                                    <p class="help-block"></p>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                {{!-- CO-SIGNER FORM --}}
+                <div class="panel panel-default">
+                    <h5>Co-Signer</h5>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p style="font-size: 12px;">If your total purchase more than ₱ 2,000, you will need 2 co-signers. Please download the Co-signer's Agreement form and fill the form.</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-warning addressRadio" style="font-size: 13px; font-weight:bold; color: rgba(0,0,0,.5); height: 35px; width:100%;"><a href="http://bridgeloan:8080/assets/docs/CoSign.pdf" download="" target="_blank" style="color: rgba(0,0,0,.5);">Download Form</a></button>
+                        </div>
+
+                    </div>
+
+                    <form id="cosigner-details">
+                            <div class="row table-bordered mt-2">
+                                <div class="col-md-12 img-upload mt-3 mb-3">
+                                    <label>Upload Photo:</label><small> click browse to upload your cosign form here, before you can checkout</small>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-secondary btn-file">
+                                            Browse… <input type="file" id="picture" name="picture">
+                                            </span>
+                                        </span>
+                                        <input type="text" class="form-control" style="width:17%" readonly>
+                                    </div>
+                                </div>
+                            </div>     
+                    </form>
+                </div>
+            
+
+                {{!-- REPAYMENT SCHEDULE --}}
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h5>Repayment Schedule</h5>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>No </th>
+                                <th>Payment Date</th>
+                                <th>Principal</th>
+                                <th>2% Interest</th>
+                                <th>Payment Amount</th>
+                                <th>Balance</th>
+                            </tr>
+                            </thead>
+                            <tbody id="paymentschedule">
+{{!--                             <tr>
+                                <td>Payment Date</td>
+                                <td>Payment Amount</td>
+                                <td>Breakdown</td>
+                                <td>Interest Amount</td>
+                                <td>Balance</td>
+                            </tr> --}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>   
+
+        {{!-- ORDER SUMMARY --}}
+            <div class="col-md-4 pl-5 mt-5">
+                <div class="panel panel-default">
+                    <div id="orderSummary">
+                        <div class="row table-bordered mt-3" style="position:fixed; width:30%;">
+                            <div class="col-md-12 mt-4 mb-2">
+                                <h5>Order Summary</h5>
+                                <hr>
+                                
+                                <div class="row scrolled" style="overflow-y: scroll; height: 200px;">
+                                    <ul class="navbar-nav" style="width:100%;">
+                                        {{#each cart}}
+                                        <li>
+                                            <div class="row pl-3 pr-3">
+                                                <div class="col-sm-7" style="font-size: 0.85em"> {{name}} </div>
+                                                <div class="col-sm-2 text-right" style="font-size: 0.85em">  &#215; {{quantity}}</div>
+                                                <div class="col-sm-3 text-right" style="font-size: 0.85em"> ₱ {{totalcost}} </div>
+                                            </div>
+                                            <hr>
+                                        </li>
+                                        
+                                        {{/each}}                  
+                                    </ul>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-6"> Subtotal </div>
+                                    <div class="col-sm-2"></div>
+                                    <div id="subtotal" class="col-sm-4 text-right" value="{{cart_total.total}}"> ₱ {{cart_total.total2}} </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6"> Interest (2%) </div>
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-4 text-right"> ₱ {{cart_total.interest}} </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6"> Grand Total </div>
+                                    <div class="col-sm-2"></div>
+                                    <div id="grandtotal" class="col-sm-4 text-right" value="{{cart_total.grandtotal2}}">
+                                        <strong> ₱ {{cart_total.grandtotal}} </strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 text-center mt-1">
+                                        <button form="order" id="placeOrderBtn" class="btn btn-warning placeButton" style="font-size: 13px; font-weight:bold; color: rgba(0,0,0,.5); height: 35px;" disabled><a style="color: rgba(0,0,0,.5);">Place your order</a></button>
+                                        <p class="mt-1" style="font-size: 13px; width:100%">By placing your order, you agree to our <a data-toggle="modal" href="#termsAndConditions">terms and conditions of use.</a></p>
+                                    </div>
+                                </div>
+                            </div>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="termsAndConditions" tabindex="-1" role="dialog" aria-labelledby="termsAndConditionsTitle" aria-hidden="true">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="termsAndConditionsTitle"><b>Terms & Conditions</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" style="height:600px;">
+                    <div class="row">
+                        <div class="col">
+                            <div style="border: 1px solid #e5e5e5; height: 570px; overflow: auto; padding: 10px;">
+                                <p>
+                                <ol>
+                                    <b><li>Parties</li></b>
+                                    This agreement is between Bridge Access and the Shopper.<br /><br />
+                                    <b><li>Definitions</li></b>
+                                    <ul>
+                                        <li type="a">“Bridge Access” is the name of the lender.</li>
+                                        <li type="a">“Borrower” means the individual who applied for the loan.</li>
+                                        <li type="a">“Coins.ph” is the online wallet used to disburse the money to be loaned. It is also used for repayments.</li>
+                                    </ul>
+                                    <br />
+                                    <b><li>Bridge Access</li></b>
+                                    All shoppers are to be assessed by Bridge Access. Bridge Access has the right to decline applicants who did not meet the requirements needed to avail the loan.<br /><br />
+
+                                    <li><b>Shopper</b><ol>
+                                        The shopper should agree on the terms and conditions before he/she can buy anything. The shopper should submit all the requirements needed for assessment. Failure to submit the necessary information will void the loan application.
+                                        <li><b>Eligibility</b><ol>
+                                            <b><li>The shopper should be 18 years old and above.</li></b>
+                                            <b><li>The shopper should be employed for the past 6 months.</li></b>
+                                            <b><li>The shopper should be a regular employee.</li></b></ol>
+                                            <b><li>Requirements</li></b>
+                                            Online Wallet (Coins.ph Account)
+                                        </li>
+                                        <br /><br />
+                                    </ol>
+                                    </li>
+
+                                    <b><li>Payment Terms</li></b>
+                                    Payment terms depends on how much is the total purchased by the shopper.<br /><br />
+
+                                    <b>Terms breakdown:</b><br>
+                                    Less than 1,200Php = 2 payouts<br />
+                                    1,200Php to 2,000Php = 3 payouts<br />
+                                    2,000Php to 5000Php = 6 payouts With Cosigner<br />
+                                    5,000Php 10,000Php = 10 payouts With Cosigner<br />
+                                    10,000Php to 25,000Php = 18 payouts With Cosigner<br />
+                                    25,000Php to 50,000Php = 24 payouts With Cosigner<br /><br />
+
+                                    <b><li>Interest Rate</li></b>
+                                    Interest is 2% per payout of the total amount purchased.<br /><br />
+
+                                    <b><li>Repayments</li></b>
+                                    The shopper agrees that his/her salary will be transferred and credited in their Coins.ph account. The shopper also agrees to auto deduct the monthly repayment amount stated above, for the duration of the repayment terms stated above.<br /><br />
+                                    The auto deduction will take place after the shopper authorizes Bridge Access to make a deduction on their salary account (Coins.ph account) once the salary is credited onto the shopper’s account.<br /><br />
+
+                                    <b><li>Late Repayments</li></b>
+                                    Bridge Access will send a reminder via email and text to the shopper 5 days and 2 days before the expected repayment. The email and text reminds the shopper to make the repayment on time. If the shopper fails to make a repayment on time, 20Php per day until the shopper makes the repayment.<br /><br />
+
+                                    If the shopper fails to make the repayment on time, Bridge Access will send out a reminder via email and text to the shopper 3 days after the expected repayment. The reminder indicates that the shopper should make the repayment immediately. Human Resources reserves the right to withhold the upcoming salary of the shopper until repayment is made.<br /><br />
+
+                                    <b><li>The Shopper Resigns or AWOL (Absent Without Official Leave)</li></b>
+                                    If the shopper resigns before the total amount purchased has been repaid, the full purchased amount including the interest, late repayment fees until the day of resignation and the repayment balance will be deducted from the shopper’s final pay. If the final pay does not cover the whole purchased amount, the shopper will be required to pay the remaining balance before being cleared by their respective company.<br /><br />
+
+                                    <b><li>Concerns</li></b>
+                                    If there are concerns, visit our website https://bridgeaccess.life/user/contact or email directly at access@bridgesoutheast.com. If the concern is urgent the shopper may call at 0998-960-0491.<br /><br />
+
+                                    <b><li>Important Information</li></b>
+                                    The shopper allows Bridge Access to look at their payroll and is not limited to salary, employee status and standings. All information and documents used in making a loan are confidential and must be kept confidential.
+                                    If the shopper fails to comply with the terms and conditions set out on this agreement, Bridge Access reserves the right to take necessary measure to collect the payment together with the corresponding interests and late payment fees, if applicable.<br /><br />
+                                </ol>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    var base_url = window.location.origin+"/";
+    var picture = $('#picture').val();
+
+// Less than 1,200Php = 2 payouts
+// 1,200Php to 2,000Php = 3 payouts
+// 2,000Php to 5000Php = 6 payouts With Cosigner
+// 5,000Php 10,000Php = 10 payouts With Cosigner
+// 10,000Php to 25,000Php = 18 payouts With Cosigner
+// 25,000Php to 50,000Php = 24 payouts With Cosigner
+
+
+    function payment_schedule(s){
+        var num_payouts = s < 1200 ? 2 : 
+                          s < 2000 ? 3 : 
+                          s < 5000 ? 6 : 
+                          s < 10000 ? 10 : 
+                          s < 25000 ? 18 : 24;
+
+        var schedule = [];
+        var date = moment().add(1, 'month');
+        //console.log(today.format("MM/DD/YYYY"));
+        for (let i = 1; i <= num_payouts; i++){
+            schedule.push({
+                payment_no: i,
+                payment_date: date.format("MM/DD/YYYY"),
+                payment_date_sql: date.format("YYYY-MM-DD"),
+                principal: (s/num_payouts).toFixed(2),
+                interest: ((s/num_payouts)*0.02).toFixed(2),
+                payment_amount: ((s/num_payouts)*1.02).toFixed(2),
+                balance: ((s*1.02)-(i*(s/num_payouts)*1.02)).toFixed(2)
+            })
+            date.add(2, 'weeks');
+        }
+
+        return schedule;
+    }
+
+    $(".qty_drop").on('change', function (){ //change event for select
+        $.ajax({ //ajax call
+            type: "POST", //method == POST
+            url: base_url+'product/change_quantity', //url to be called
+            data: { 'qty' :  $(this).val(), 'id' : $(this).siblings("input").val() }, //data to be send
+            dataType:'JSON',
+            success:function(data){
+                window.location.reload();
+                //$( "#reload" ).load( base_url+"dashboard/view_cart #reload" );
+            }
+        });
+    });
+
+    $('.del_item').click(function() {
+        if (confirm('Are you sure you want to delete？')) {
+            var item_id = $(this).val();
+            $.ajax({
+                url: base_url+'product/delete_item',
+                type: 'POST',
+                data: {'id':item_id},
+                dataType:'JSON',
+                success:function(data){
+                    window.location.reload();
+                }
+            });
+        }
+    });
+
+    $(document).on('change', '.btn-file :file', function() {
+        var input = $(this),
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [label]);
+    });
+
+    $('.btn-file :file').on('fileselect', function(event, label) {
+
+        var input = $(this).parents('.img-upload').find(':text'),
+                log = label;
+
+        if( input.length ) {
+            input.val(log);
+            $('.placeButton').attr('disabled', false);
+        } 
+        else {
+            $('.placeButton').attr('disabled', true);
+        }
+    });
+
+// TOTAL ORDER NEED LOAN
+    var totalsum = $("#subtotal").attr('value');
+    totalsum = parseFloat(parseFloat(totalsum).toFixed(2));
+    console.log(typeof totalsum, totalsum);
+
+    $(document).ready(function(){
+        //disable cosigners info if totalsum is <=2000
+        if(totalsum <= 2000){
+            console.log()
+            $('.loan_view').attr('disabled', true);
+            $('.placeButton').removeAttr('disabled');
+        }
+        else{
+            $('.loan_view').removeAttr('disabled');
+             $('.loan_view').attr('required', true);
+            $('.placeButton').attr('disabled', true);
+        }
+
+        schedule = payment_schedule(totalsum);
+        schedule.forEach(v => {$("#paymentschedule").append(
+            `<tr>
+                <td>${v.payment_no}</td>
+                <td>${v.payment_date}</td>
+                <td>₱ ${v.principal}</td>
+                <td>₱ ${v.interest}</td>
+                <td>₱ ${v.payment_amount}</td>
+                <td>₱ ${v.balance}</td>
+            </tr>`
+        )});
+    })
+
+    $('.addressRadio').click(function() {
+    //check if radio is checked
+        if ($(this).is(':checked')) {
+            $('.newAddress').attr('disabled', true); //disable input new address
+            $('.newAddress').removeAttr('required'); //disable require new address
+            $('.addressRadio').attr('required', true); //enable require radio
+        } else {
+            $('.newAddress').removeAttr('disabled'); //enable input new address
+            $('.newAddress').attr('required', true); //enable require new address
+            $('.addressRadio').prop( 'checked', false );
+            $('.addressRadio').removeAttr('required'); //disable require radio
+            $('#address-line2').removeAttr('required');
+        }
+    });
+
+// PLACE ORDER BUTTON
+    $("#order").submit(function(event) {
+        event.preventDefault();
+        let subtotal = parseFloat($("#subtotal").attr('value'));
+        let grandtotal = parseFloat($("#grandtotal").attr('value'));
+        let interest = grandtotal - subtotal;
+        let micropayment = payment_schedule(subtotal);
+        let cart_item_id = [];
+        let cart_quantity = [];
+        var num_payouts = subtotal < 1200 ? 2 : 
+                          subtotal < 2000 ? 3 : 
+                          subtotal < 5000 ? 6 : 
+                          subtotal < 10000 ? 10 : 
+                          subtotal < 25000 ? 18 : 24;
+
+        let payment_no = [];
+        let payment_date_sql = [];
+        let principal = [];
+        let interest_amt = [];
+        let payment_amount = [];
+        let balance = [];
+
+        micropayment.forEach(v => {
+            payment_no.push(v.payment_no);
+            payment_date_sql.push(v.payment_date_sql);
+            principal.push(v.principal);
+            interest_amt.push(v.interest);
+            payment_amount.push(v.payment_amount);
+            balance.push(v.balance);
+        });
+
+        //GET CART DETAILS AND PUSH TO ARRAY
+        {{#each cart}}
+            cart_item_id.push({{item_id}})
+            cart_quantity.push({{quantity}})
+        {{/each}}
+
+        console.log("ORDER BUTTON PRESSED")
+        
+        //GET ADDRESS ID FROM SAVED ADDRESS, OR CREATE NEW ADDRESS
+        if ($(".newAddress").attr("disabled") == "disabled")
+        {
+            address_id = $("input[name='savedAddress']:checked").attr("address_id")
+            console.log(address_id);
+        }
+        else
+        {
+            var new_address = {
+                name: $("#full-name").val().trim(),
+                address1: $("#address-line1").val().trim(),
+                address2: $("#address-line2").val().trim(),
+                city: $("#city").val().trim(),
+                zip: $("#postal-code").val().trim()
+            }
+
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "add_address",
+                data:  new_address,
+                dataType: "json",
+                success: function (response) {
+                    address_id = response[insertId];
+                }
+            });
+        }
+       
+        //ADD ORDER HEADER
+        var order_header_id;
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: 'create_order_header',
+            data: {"subtotal": subtotal,
+                   "grandtotal": grandtotal,
+                   "interest": interest,
+                   "shipping_address_id": address_id},
+            dataType: "json",
+            success:function(response){
+                order_header_id = response["insertId"];
+            }
+        })
+
+
+        //ADD ORDER DETAILS
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: 'create_order_details',
+            data: {"order_header_id": order_header_id,
+                   "cart_item_id": cart_item_id,
+                   "cart_quantity": cart_quantity},
+            success: function(response){
+                //console.log("success at order detail inserts");
+            }
+        })
+
+
+        //ADD MICROPAYMENT
+        var micropayment_id;
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: 'create_micropayment',
+            data: {"total_amount": grandtotal,
+                   "order_header_id": order_header_id,
+                   "date_start": micropayment[0].payment_date_sql,
+                   "date_finish": micropayment[micropayment.length-1].payment_date_sql},
+            dataType: "json",
+            success:function(response){
+                micropayment_id = response["insertId"];
+            }
+        })
+
+        //ADD REPAYMENT ENTRIES
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: 'create_repayment',
+            data: { "micropayment_id": micropayment_id,
+                    "payment_no": payment_no,
+                    "payment_date_sql": payment_date_sql,
+                    "principal": principal,
+                    "interest": interest_amt,
+                    "payment_amount": payment_amount,
+                    "balance": balance
+            },
+            success:function(response){
+                console.log("repayment insert success")
+            }
+        })
+
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: "success_checkout",
+            data: { "name": "Hansel",
+                    "order_header_id": order_header_id,
+                    "grandtotal": $("#grandtotal").attr('value'),
+                    "payouts": num_payouts
+            },
+            success: function(response){
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "/cart/cart_purchased",
+                    success: function(ress){
+                        console.log(ress);
+                    }
+                })
+                $("html").html(response);
+            }
+        })
+
+    });
+</script>

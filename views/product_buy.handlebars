@@ -1,0 +1,68 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            <strong>Micropayment</strong>
+            <small>Product Detail</small>
+        </h1>
+    </section>
+
+    <section class="content">
+        <div class="box">
+
+            <!-- Start Row -->
+            <div class="row">
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="box-body">
+                        <!-- <span class="info-box-icon bg-aqua"></span> -->
+                        <div class="col-sm-8 col-sm-offset-4 caption">
+                            <img src="assets/images/product/img_url" class="img-responsive pad">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Product Name:</label>
+                            <div class="col-sm-3">
+                                <span class="inline-text">product_name</span>
+                            </div>
+                            <label class="control-label col-sm-2">Product Type:</label>
+                            <div class="col-sm-4">
+                                <span class="inline-text">product_type</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="product_amount" value="selling_price">
+                            <input type="hidden" name="product_id" value="id">
+                            <label class="control-label col-sm-3">Product Amount:</label>
+                            <div class="col-sm-3">
+                                <span class="inline-text">selling_price</span>
+                            </div>
+                            <label class="control-label col-sm-2">Product Details:</label>
+                            <div class="col-sm-4">
+                                <span class="inline-text">description</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Repayment Terms:</label>
+                            <div class="col-sm-3">
+                                <select id="terms" name="terms" class="form-control">
+                                    <option value="6">6 months</option>
+                                    <option value="9">9 months</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-5 col-sm-12">
+                                <button type="submit" name="submit" id="submit" value="Submit" class="btn btn-warning">Submit</button>
+                                <a href="dashboard/view_product"><button type="button" class="btn btn-default">Back</button></a>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

@@ -1,0 +1,269 @@
+<style type="text/css">
+    p {
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 15px;
+    }
+
+    h4 {
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    h5 {
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    /*TABLE CSS*/
+    .table>tbody>tr>td, .table>tfoot>tr>td{
+        vertical-align: middle;
+    }
+
+    .child {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .parent {
+        position: relative;
+    }
+
+
+
+    /*Media Query*/
+    @media screen and (max-width: 600px) {
+        table#cart tbody td .form-control{
+            width:20%;
+            display: inline !important;
+        }
+        .actions .btn{
+            width:36%;
+            margin:1.5em 0;
+        }
+
+        .actions .btn-info{
+            float:left;
+        }
+        .actions .btn-danger{
+            float:right;
+        }
+
+        table#cart thead { display: none; }
+        table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+        table#cart tbody tr td:first-child { background: #333; color: #fff; }
+        table#cart tbody td:before {
+            content: attr(data-th); font-weight: bold;
+            display: inline-block; width: 8rem;
+        }
+
+        table#cart tfoot td{display:block; }
+        table#cart tfoot td .btn{display:block;}
+    }
+
+
+</style>
+
+<section class="content-section-a" style="background-color: #FFF; margin-top: 90px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 mt-3">
+                <table id="cart" class="table table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th style="width:60%; font-size:18px;">Shopping Cart</th>
+                        <th style="width:10%; font-weight:normal; font-size:15px;"></th>
+                        <th style="width:8%; font-weight:normal; font-size:15px;">Quantity</th>
+                        <th style="width:22%; font-weight:normal; font-size:15px;" class="text-center">Price</th>
+                        <th style="width:10%"></th>
+                    </tr>
+                    </thead>
+                    <tbody id='cartContent'>
+                    {{#each cart_content}}
+                        <tr cart-id={{id}}>
+                            <td data-th="Product">
+                                <div class="row">
+                                    <div class="col-sm-2 hidden-xs"><img src="{{smallimage}}" alt="{{name}}-img" class="img-responsive"/></div>
+                                    <div class="col-sm-10 parent">
+                                        <h6 class="nomargin child">{{name}}</h6>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-th=" "></td>
+                            <td data-th="Quantity">
+                                <input id='qty-cid-{{id}}'type="number" class="form-control text-center" value="{{quantity}}" min="1" max="10">
+                            </td>
+                            <td data-th="Price" class="text-center">₱ {{price}}</td>
+                            <td class="actions" data-th="">
+                                <button class="btn btn-danger btn-md del_item"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+
+            {{!-- ORDER SUMMARY --}}
+            <div class="col-md-4 pl-5 mt-5">
+                <div class="panel panel-default">
+                    <div id="orderSummary">
+                        <div class="row table-bordered mt-3" style="position:fixed; width:30%;">
+                            <div class="col-md-12 mt-4 mb-2">
+                                <h5>Order Summary</h5>
+                                <hr>
+
+                                <div class="row">
+                                    <ul class="navbar-nav" style="width:100%;">
+                                        <li>
+                                            <div class="row pl-3 pr-3">
+                                                <div class="col-sm-6"> Cart Subtotal </div>
+                                                <div class="col-sm-2"></div>
+                                                <div class="col-sm-4 text-right"> ₱ <span id="subtotalVal">{{cart_total.total2}}</span> </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="row pl-3 pr-3">
+                                                <div class="col-sm-6"> Interest (2%) </div>
+                                                <div class="col-sm-2"></div>
+                                                <div class="col-sm-4 text-right"> ₱ <span id="interestVal">{{cart_total.interest}}</span></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-6"> <b>ORDER TOTAL</b> </div>
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-4 text-right">
+                                       ₱ <span id="grandTotalVal">{{cart_total.grandtotal}}</span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-6 text-center mt-1" style="padding-right:10px;">
+                                        <a href="#" class="btn btn-outline-warning btn-block"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+                                    </div>
+                                    <div id="updateBtn" class="col-sm-6 text-center mt-1" style="padding-left:10px;">
+                                        <a class="btn btn-warning btn-block">Update Cart <i class="fa fa-refresh"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3 mb-3">
+                                    <div class="col-sm-12 text-center">
+                                        <a href="/shop/order_display" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+    var base_url = window.location.origin+"/";
+    var sum = $('#sum').val();
+
+    // function calculateTotal(){
+    //     var subtotal = 0;
+    //     {{#each cart_content}} 
+    //         subtotal += parseFloat({{quantity}})*parseFloat({{price}});
+    //     {{/each}}
+    //     subtotal = parseFloat(subtotal.toFixed(2));
+    //     var interest = 0.02*subtotal;
+    //     interest = parseFloat(interest.toFixed(2));
+    //     var grandtotal = subtotal + interest;
+    //     grandtotal = parseFloat(grandtotal.toFixed(2));
+    //     console.log(`subtotal: ${subtotal} | interest: ${interest} | grand total: ${grandtotal}`);
+
+    //     $("#subtotalVal").html(subtotal.toFixed(2));
+    //     $("#interestVal").html(interest.toFixed(2));
+    //     $("#grandTotalVal").html(grandtotal.toFixed(2));
+    // }
+
+    // $(document).ready(function(){
+    //     calculateTotal();
+    // })
+
+    $(".qty_drop").on('change', function (){ //change event for select
+        $.ajax({ //ajax call
+            type: "POST", //method == POST
+            url: base_url+'product/change_quantity', //url to be called
+            data: { 'qty' :  $(this).val(), 'id' : $(this).siblings("input").val() }, //data to be send
+            dataType:'JSON',
+            success:function(data){
+                window.location.reload();
+                //$( "#reload" ).load( base_url+"dashboard/view_cart #reload" );
+            }
+        });
+    });
+
+    $('.del_item').on('click', function(){
+        let cid = $(this).parent().parent().attr("cart-id");
+        $.ajax({
+            type: "POST",
+            url: '/cart/delete?cart_id='+cid,
+            success:function(data){
+                window.location.reload();
+            }
+        })
+    });
+
+    $('#updateBtn').on('click', function(){
+        let a = []; cid_a = [];
+        {{#each cart_content}}
+            a.push($("#qty-cid-{{id}}").val().trim());
+            cid_a.push({{id}});
+        {{/each}}
+        console.log(a);
+        console.log(cid_a);
+        $.ajax({
+            type: "POST",
+            url: '/cart/update',
+            data: {'a':a, 'cid':cid_a},
+            success:function(data){
+                //calculateTotal();
+                window.location.reload();
+            }
+        })
+    });
+
+
+    $(document).on('change', '.btn-file :file', function() {
+        var input = $(this),
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [label]);
+    });
+
+    $('.btn-file :file').on('fileselect', function(event, label) {
+
+        var input = $(this).parents('.img-upload').find(':text'),
+                log = label;
+
+        if( input.length ) {
+            input.val(log);
+        } else {
+
+        }
+    });
+
+    if(sum <= 2000){
+        $('#loan_view').attr('disabled', true);
+        $('#toggle1').click(function () {
+            //check if radio is checked
+            if ($(this).is(':checked')) {
+                $('#loan_view').removeAttr('disabled'); //enable input
+            } else {
+                $('#loan_view').attr('disabled', true); //disable input
+                alert('You must agree with the terms and conditions');
+            }
+        });
+    }else{
+        $('#loan_view').removeAttr('disabled');
+    }
+
+
+
+</script>
