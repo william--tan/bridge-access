@@ -1,10 +1,10 @@
 const mysql = require("mysql");
 
 let config = {
-    host: "127.0.0.1",
-    user: "root",
-    password: "",
-    database: "bridgeAccess",
+    host: "us-cdbr-iron-east-05",
+    user: "bdf24a6043cca2",
+    password: "c80b30bf",
+    database: "heroku_7b5a7a43a60c72d",
     multipleStatements: true
 };
 
