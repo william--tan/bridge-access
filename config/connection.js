@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 
 let config = {
-    host: "us-cdbr-iron-east-05",
+    host: "us-cdbr-iron-east-05.cleardb.net",
     user: "bdf24a6043cca2",
     password: "c80b30bf",
     database: "heroku_7b5a7a43a60c72d",
